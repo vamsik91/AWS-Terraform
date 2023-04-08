@@ -1,3 +1,5 @@
+
+#NACL
 resource "aws_network_acl" "Example-nacl" {
   vpc_id = aws_vpc.Example.id
   tags = {
@@ -5,6 +7,8 @@ resource "aws_network_acl" "Example-nacl" {
   }
 }
 
+
+#NACL Outnbound Rules
 resource "aws_network_acl_rule" "Example-nacl-Inbound" {
   network_acl_id = aws_network_acl.Example-nacl.id
   rule_number    = 100
@@ -16,6 +20,7 @@ resource "aws_network_acl_rule" "Example-nacl-Inbound" {
   to_port        = 65335
 }
 
+#NACL Inbond-SSH-Rule
 resource "aws_network_acl_rule" "Example-nacl-SSH" {
   network_acl_id = aws_network_acl.Example-nacl.id
   rule_number    = 100
@@ -27,6 +32,7 @@ resource "aws_network_acl_rule" "Example-nacl-SSH" {
   to_port        = 22
 }
 
+#NACL Inbound-HTTP-Rule
 resource "aws_network_acl_rule" "Example-nacl-Http" {
   network_acl_id = aws_network_acl.Example-nacl.id
   rule_number    = 200
@@ -38,7 +44,9 @@ resource "aws_network_acl_rule" "Example-nacl-Http" {
   to_port        = 80
 }
 
+#NACL Subnet Association
 resource "aws_network_acl_association" "Example-acl-asso" {
   network_acl_id = aws_network_acl.Example-nacl.id
   subnet_id      = aws_subnet.Example_subnet.id
 }
+
