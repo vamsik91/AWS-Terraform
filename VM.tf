@@ -4,7 +4,7 @@ resource "aws_instance" "Example-server" {
   key_name               = "key"
   subnet_id              = aws_subnet.Example_subnet.id
   vpc_security_group_ids = [aws_security_group.Example-sg.id]
-  userdata=file("web.sh")
+  user_data              = file("web.sh")
   tags = {
     Name = "Example-Server"
   }
