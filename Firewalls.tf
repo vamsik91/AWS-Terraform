@@ -37,3 +37,8 @@ resource "aws_network_acl_rule" "Example-nacl-Http" {
   from_port      = 80
   to_port        = 80
 }
+
+resource "aws_network_acl_association" "Example-acl-asso" {
+  network_acl_id = aws_network_acl.Example-nacl.id
+  subnet_id      = aws_subnet.Example_subnet.id
+}
