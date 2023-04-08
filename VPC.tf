@@ -14,3 +14,11 @@ resource "aws_subnet" "Example_subnet" {
     Name = "Example_subnet"
   }
 }
+
+resource "aws_internet_gateway" "Example-Igw" {
+  vpc_id = aws_vpc.Example.id
+
+  tags = {
+    Name = "Example-Igw"
+  }
+}
