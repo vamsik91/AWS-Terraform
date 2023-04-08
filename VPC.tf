@@ -34,3 +34,8 @@ resource "aws_route_table" "Example-rt" {
     Name = "Example-rt"
   }
 }
+
+resource "aws_route_table_association" "Example-rt-asso" {
+  subnet_id      = aws_subnet.Example_subnet.id
+  route_table_id = aws_route_table.Example-rt.id
+}
