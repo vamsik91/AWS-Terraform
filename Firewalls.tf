@@ -53,7 +53,44 @@ resource "aws_network_acl_association" "Example-acl-asso" {
 #Adding Security groups
 
 resource "aws_security_group" "Example-sg" {
-  name        = "Example-sg"
-  vpc_id      = aws_vpc.Example.id
+  name   = "Example-sg"
+  vpc_id = aws_vpc.Example.id
 
+  tags = {
+    Name = "Example-sg"
+  }
+
+
+}
+
+#Adding Security rules
+
+resource "aws_security_group_rule" "Example-ssh-rule" {
+  type        = "ingress"
+  from_port   = 22
+  to_port     = 22
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = aws_security_group.Example-sg.id
+}
+
+resource "aws_security_group_rule" "Example-http-rule" {
+  type        = "ingress"
+  from_port   = 80
+  to_port     = 80
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = aws_security_group.Example-sg.id
+}
+
+resource "aws_security_group_rule" "Example-outbound-rule" {
+  type        = "egress"
+  from_port   = 0
+  to_port     = 65335
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = aws_security_group.Example-sg.id
 }
