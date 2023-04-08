@@ -50,3 +50,10 @@ resource "aws_network_acl_association" "Example-acl-asso" {
   subnet_id      = aws_subnet.Example_subnet.id
 }
 
+#Adding Security groups
+
+resource "aws_security_group" "Example-sg" {
+  name        = "Example-sg"
+  vpc_id      = aws_vpc.Example.id
+
+}
